@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------
+   Halcyon Auto design tokens
+   Kingfisher palette: deep lagoon teal, bright kingfisher blue, sunrise amber.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-background: #f3f8f8;
+  --color-foreground: #0a2530;
+  --color-ink: #0a2530;
+
+  --color-lagoon: #0b3c49;
+  --color-lagoon-deep: #072a34;
+
+  --color-primary: #0b7285;
+  --color-primary-hover: #095c6b;
+  --color-primary-foreground: #ffffff;
+
+  --color-accent: #ffb703;
+  --color-accent-hover: #f5a800;
+  --color-accent-foreground: #0a2530;
+
+  --color-card: #ffffff;
+  --color-muted: #e5eff0;
+  --color-muted-foreground: #4a646d;
+  --color-border: #d3e1e3;
+  --color-input: #bfd2d6;
+  --color-ring: #0b7285;
+
+  --color-destructive: #c7263d;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #15803d;
+
+  --font-heading: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-rise: rise 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-hero-zoom: hero-zoom 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pop: pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-zoom {
+  from { transform: scale(1.1); }
+  to { transform: scale(1); }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Page width + side padding that grows with the screen */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (min-width: 40rem) { padding-inline: 1.5rem; }
+  @media (min-width: 64rem) { padding-inline: 2rem; }
+}
+
+/* Space for the fixed navbar on pages that don't start with a hero */
+@utility page-top {
+  padding-top: 6rem;
+  @media (min-width: 48rem) { padding-top: 7.5rem; }
+}
+
+/* Staggered entrance for hero content */
+.rise-1 { animation-delay: 0.1s; }
+.rise-2 { animation-delay: 0.22s; }
+.rise-3 { animation-delay: 0.36s; }
+.rise-4 { animation-delay: 0.5s; }
+
+/* Scroll reveal — pure CSS, only where the browser supports it.
+   Everywhere else the content is simply visible. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 4% entry 38%;
+  }
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(100deg, var(--color-muted) 30%, #f4fafa 50%, var(--color-muted) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
