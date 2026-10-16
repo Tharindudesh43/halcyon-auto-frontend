@@ -49,7 +49,7 @@ export default async function CareersPage() {
                 href={`mailto:${contact.email}?subject=${encodeURIComponent("CV — general application")}`}
                 className={`${buttonVariants({ variant: "accent", size: "lg" })} mt-7`}
               >
-                <Mail className="h-5 w-5" /> Email your CV
+                <Mail className="h-5 w-5" /> Email your CV Now
               </a>
             )}
           </div>
