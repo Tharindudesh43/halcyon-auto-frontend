@@ -12,6 +12,7 @@ export async function listArticles(params: Record<string, string> = {}) {
   }
 }
 
+/** Public — one published article by its URL slug. Throws ApiError(404) if missing. */
 export async function getArticle(slug: string) {
   return apiFetch<Article>(`/articles/${encodeURIComponent(slug)}`, { revalidate: 300 });
 }
