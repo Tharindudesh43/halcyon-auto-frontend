@@ -4,11 +4,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Halcyon Auto Cars you can trust in Sri Lanka",
+    default: "Halcyon Auto",
     template: "%s | Halcyon Auto",
   },
   description:
     "Browse carefully checked cars across Sri Lanka and talk straight to the seller. Honest prices, real photos, no middlemen.",
+  icons: {
+    icon: "/logo.png",
+  },
   openGraph: {
     siteName: "Halcyon Auto",
     type: "website",
