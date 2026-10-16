@@ -2,6 +2,7 @@ import { apiFetch } from "./api";
 import { getSessionToken } from "./session";
 import type { Article, ArticleInput, ArticleSummary, Paginated } from "./types";
 
+/** Public — published articles. */
 export async function listArticles(params: Record<string, string> = {}) {
   const qs = new URLSearchParams(params).toString();
   try {
