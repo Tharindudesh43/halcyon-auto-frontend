@@ -8,8 +8,8 @@ export function Logo({ light = false, className }: { light?: boolean; className?
         <Image 
           src="/logo.png"
           alt="Halcyon Auto Logo" 
-          width={80} 
-          height={80} 
+          width={50} 
+          height={50} 
           className="object-cover"
         />
       {/* </span> */}
