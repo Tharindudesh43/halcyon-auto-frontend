@@ -104,7 +104,7 @@ export function FinanceCalculator({
   }
 
   return (
-    <div className={cn("grid gap-6", !compact && "lg:grid-cols-[1.2fr_1fr] lg:gap-8")}>
+    <div className={cn("grid grid-cols-1 gap-6", !compact && "lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-8")}>
       <div className="space-y-6 rounded-3xl bg-card p-5 ring-1 ring-border sm:p-7">
         {start?.title ? (
           <p className="rounded-2xl bg-muted px-4 py-3 text-sm text-muted-foreground">
