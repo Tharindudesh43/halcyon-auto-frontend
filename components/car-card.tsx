@@ -67,7 +67,7 @@ export function CarCard({ car, priority = false }: { car: CarListing; priority?:
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h3 className="line-clamp-1 font-heading text-lg font-bold text-ink transition-colors group-hover:text-primary">
           {car.title}
         </h3>

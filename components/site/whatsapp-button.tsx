@@ -9,6 +9,7 @@ export async function WhatsAppButton() {
 
   return (
     <a
+      data-float-wa
       href={`https://wa.me/${number}?text=${encodeURIComponent("Hi Halcyon Auto! I have a question.")}`}
       target="_blank"
       rel="noopener noreferrer"

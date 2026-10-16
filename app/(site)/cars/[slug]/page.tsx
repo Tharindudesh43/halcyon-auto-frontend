@@ -111,7 +111,8 @@ export default async function CarDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="container-page page-top pb-8">
+    <div className="container-page page-top pb-24 lg:pb-8">
+      <style>{`@media (max-width: 1023px){[data-float-wa]{display:none}}`}</style>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
@@ -168,8 +169,8 @@ export default async function CarDetailPage({ params }: Props) {
           </section>
         </div>
 
-        <aside className="animate-rise rise-2 lg:sticky lg:top-28 lg:self-start">
-          <div className="rounded-3xl bg-card p-6 shadow-xl shadow-primary/10 ring-1 ring-border md:p-7">
+        <aside className="animate-rise rise-2 lg:sticky lg:top-28 lg:-m-2 lg:max-h-[calc(100svh-8rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain lg:p-2">
+          <div className="rounded-3xl bg-card p-5 shadow-xl shadow-primary/10 ring-1 ring-border sm:p-6 md:p-7">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-muted px-3 py-1 text-sm font-semibold text-muted-foreground">
                 {car.year} · {car.brand}
@@ -180,7 +181,7 @@ export default async function CarDetailPage({ params }: Props) {
               {sold && <span className="rounded-full bg-ink px-3 py-1 text-sm font-bold text-white">Sold</span>}
             </div>
 
-            <h1 className="mt-4 font-heading text-3xl font-extrabold leading-tight text-ink">{car.title}</h1>
+            <h1 className="mt-4 font-heading text-2xl font-extrabold leading-tight text-ink sm:text-3xl">{car.title}</h1>
 
             <div className="mt-5">
               {off > 0 && (
@@ -189,7 +190,7 @@ export default async function CarDetailPage({ params }: Props) {
                   <span className="font-semibold text-destructive">Save {lkr(original - price)}</span>
                 </p>
               )}
-              <p className={`font-heading text-4xl font-extrabold ${sold ? "text-muted-foreground" : "text-primary"}`}>
+              <p className={`font-heading text-3xl font-extrabold sm:text-4xl ${sold ? "text-muted-foreground" : "text-primary"}`}>
                 {lkr(price)}
               </p>
               {down && (
@@ -268,6 +269,43 @@ export default async function CarDetailPage({ params }: Props) {
             ))}
           </div>
         </section>
+      )}
+
+      {!sold && (whatsappHref || telHref) && (
+        <div
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 pt-3 backdrop-blur lg:hidden"
+          style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom, 0px))" }}
+        >
+          <div className="mx-auto flex max-w-xl items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-xs text-muted-foreground">{car.title}</p>
+              <p className="font-heading text-lg font-extrabold leading-tight text-primary">{lkr(price)}</p>
+            </div>
+            {telHref && (
+              <TrackLink
+                carId={car.id}
+                type="call"
+                href={telHref}
+                aria-label="Call"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-input bg-card text-ink"
+              >
+                <Phone className="h-5 w-5" />
+              </TrackLink>
+            )}
+            {whatsappHref && (
+              <TrackLink
+                carId={car.id}
+                type="whatsapp"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-green-700 px-5 text-sm font-semibold text-white active:scale-[0.97]"
+              >
+                <MessageCircle className="h-5 w-5" /> WhatsApp
+              </TrackLink>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

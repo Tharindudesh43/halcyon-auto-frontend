@@ -90,7 +90,7 @@ export default async function HomePage() {
             </div>
 
             {catalogue && (
-              <dl className="rise-3 mt-12 flex max-w-xl animate-rise gap-8 border-t border-white/20 pt-6 sm:gap-12">
+              <dl className="rise-3 mt-10 flex max-w-xl animate-rise flex-wrap gap-x-6 gap-y-4 border-t border-white/20 pt-6 sm:mt-12 sm:gap-x-12">
                 <div>
                   <dt className="text-sm text-white/60">Cars listed</dt>
                   <dd className="font-heading text-3xl font-extrabold text-white">{catalogue.total}</dd>
