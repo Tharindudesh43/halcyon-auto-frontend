@@ -494,7 +494,8 @@ export function PopupForm({ initial }: { initial: PopupSettings }) {
             image: url,
             link: link?.trim() || null,
             alt: alt?.trim() || null,
-            version: reshow || changed ? Date.now() : initial.version,
+            version: null
+            // version: reshow || changed ? Date.now() : initial.version,
           };
         });
       }}
